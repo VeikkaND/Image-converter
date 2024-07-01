@@ -5,10 +5,9 @@ dirInput = input("submit directory: \n")
 os.chdir(dirInput)
 files = os.listdir(dirInput)
 fileDict = {}
-print(files)
 
 for file in files:
-    match = re.search("[.].+", file)
+    match = re.search("[.][a-zA-Z]+$", file)
     if(match == None):
         continue
     filetype = match.group()
@@ -17,7 +16,7 @@ for file in files:
     else:
         fileDict[filetype] = 1
 
-print("found the following file types in the directory: ")
+print("found the following image types in the directory: ")
 print(fileDict)
 
 def fun(file):
@@ -44,7 +43,6 @@ if(removeOldInput == "n"):
 print("converting the following files to " + targetType + ": ")
 for i in filesToConvert:
     print(i)
-    print(os.getcwd())
     im = Image.open(i)
     rgb_im = im.convert("RGB")
     filename = i.rstrip(convertTarget)
